@@ -19,19 +19,20 @@ const particles = [
   { left: "97%", size: 3, delay: 4.9, duration: 15 },
 ]
 
-const useReducedMotion = () => {
-  const [reduced, setReduced] = React.useState(false)
-
-  React.useEffect(() => {
-    const query = window.matchMedia("(prefers-reduced-motion: reduce)")
-    setReduced(query.matches)
-    const handleChange = () => setReduced(query.matches)
-    query.addEventListener("change", handleChange)
-    return () => query.removeEventListener("change", handleChange)
-  }, [])
-
-  return reduced
+const reducedMotionQuery = "(prefers-reduced-motion: reduce)"
+const subscribeToReducedMotion = (onChange: () => void) => {
+  const query = window.matchMedia(reducedMotionQuery)
+  query.addEventListener("change", onChange)
+  return () => query.removeEventListener("change", onChange)
 }
+const getReducedMotion = () => window.matchMedia(reducedMotionQuery).matches
+const getServerReducedMotion = () => true
+
+const useReducedMotion = () => React.useSyncExternalStore(
+  subscribeToReducedMotion,
+  getReducedMotion,
+  getServerReducedMotion,
+)
 
 const HeroFx = () => {
   const reduced = useReducedMotion()
