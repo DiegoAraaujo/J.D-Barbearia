@@ -1,5 +1,7 @@
 "use client"
 
+import Image from "next/image"
+
 import { motion, useMotionValueEvent, useScroll, useSpring, useTransform } from "motion/react"
 import { useRef, useState } from "react"
 import { cn } from "@/utils/class-name"
@@ -54,7 +56,7 @@ const ScrollChoreography = ({ className, images }: Props) => {
         <motion.div style={{ opacity: fourOpacity, scale: fourScale }} className="absolute inset-0 grid grid-cols-2 gap-3 p-4 md:block md:p-0">
           {story.map(([number, title, text, image, position]) => (
             <article key={number} className={cn("relative min-h-0 overflow-hidden rounded-2xl shadow-2xl ring-1 ring-gold/20 md:absolute md:h-[31vh] md:w-[42vw]", position)}>
-              <img src={images[image]} alt="" className="absolute inset-0 h-full w-full object-cover" />
+              <Image src={images[image]} alt="" fill sizes="(min-width: 768px) 42vw, 50vw" className="object-cover" />
               <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/65 to-ink/15" />
               <div className="absolute inset-x-0 bottom-0 p-4 md:p-6">
                 <span className="text-xs font-semibold tracking-[.2em] text-gold">{number}</span>
@@ -68,7 +70,7 @@ const ScrollChoreography = ({ className, images }: Props) => {
         <motion.div style={{ opacity: twoOpacity, scale: twoScale }} className="absolute inset-0 flex items-center justify-center">
           {service.map(([number, title, text, image], index) => (
             <motion.article key={number} style={{ x: index ? rightX : leftX }} className="absolute h-[58vh] w-[42vw] min-w-[145px] max-w-[540px] overflow-hidden rounded-2xl shadow-2xl ring-1 ring-gold/20 md:h-[54vh] md:w-[34vw]">
-              <img src={images[image]} alt="" className="absolute inset-0 h-full w-full object-cover" />
+              <Image src={images[image]} alt="" fill sizes="(min-width: 768px) 34vw, 42vw" className="object-cover" />
               <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/70 to-ink/20" />
               <div className="absolute inset-x-0 bottom-0 p-4 md:p-8">
                 <span className="text-xs font-semibold tracking-[.2em] text-gold">{number}</span>
@@ -80,7 +82,7 @@ const ScrollChoreography = ({ className, images }: Props) => {
         </motion.div>
 
         <motion.article style={{ opacity: finalOpacity, width: finalWidth, height: finalHeight, borderRadius: finalRadius }} className="absolute left-1/2 top-1/2 z-30 -translate-x-1/2 -translate-y-1/2 overflow-hidden bg-surface shadow-2xl ring-1 ring-gold/20">
-          <img src={images.topRight} alt="" className="absolute inset-0 h-full w-full object-cover" />
+          <Image src={images.topRight} alt="" fill sizes="100vw" className="object-cover" />
           <div className="absolute inset-0 bg-gradient-to-r from-ink/95 via-ink/80 to-ink/25" />
           <motion.div style={{ opacity: contentOpacity, y: contentY }} className="absolute inset-0 flex max-w-2xl flex-col justify-end p-6 pb-12 md:justify-center md:p-12 lg:p-20">
             <span className="text-xs font-semibold uppercase tracking-[.24em] text-gold">Sobre mim</span>

@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+import Image from "next/image"
 import {
   motion,
   useMotionValue,
@@ -228,7 +229,9 @@ const GalleryCard = ({ slide, index, total, progress, config }: CardProps) => {
         "h-56 w-44 sm:h-80 sm:w-56 lg:h-[26rem] lg:w-72 xl:h-[32rem] xl:w-[21rem]",
       )}
     >
-      <img
+      <Image
+        fill
+        sizes="(min-width: 1280px) 336px, (min-width: 1024px) 288px, (min-width: 640px) 224px, 176px"
         src={slide.image}
         alt={slide.title}
         className="pointer-events-none absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
