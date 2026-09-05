@@ -1,0 +1,79 @@
+@import "tailwindcss";
+
+@theme {
+  --color-ink: #080a0f;
+  --color-surface: #111620;
+  --color-surface-light: #19202c;
+  --color-gold: #d4d9e2;
+  --color-gold-bright: #ffffff;
+  --color-wine: #68152a;
+  --color-wine-bright: #a72d4c;
+  --color-bone: #f5f7fa;
+  --color-muted: #9098a6;
+  --font-display: var(--font-sora);
+  --font-sans: var(--font-manrope);
+}
+
+body {
+  background-color: var(--color-ink);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+a,
+button,
+select,
+summary,
+[role="button"] {
+  cursor: pointer;
+}
+
+button:disabled,
+select:disabled,
+[aria-disabled="true"] {
+  cursor: not-allowed;
+}
+
+@keyframes rule-draw {
+  from {
+    transform: scaleY(0);
+  }
+  to {
+    transform: scaleY(1);
+  }
+}
+
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slow-zoom {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.08);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
