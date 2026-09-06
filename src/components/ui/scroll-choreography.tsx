@@ -3,7 +3,7 @@
 import Image from "next/image"
 
 import { motion, useMotionValueEvent, useScroll, useSpring, useTransform } from "motion/react"
-import { useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { cn } from "@/utils/class-name"
 import { ChevronDown } from "lucide-react"
 
@@ -29,6 +29,65 @@ const ScrollChoreography = ({ className, images }: Props) => {
   const [scrollDirection, setScrollDirection] = useState<"up" | "down">("down")
   const { scrollY, scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end end"] })
   const p = useSpring(scrollYProgress, { stiffness: 260, damping: 42, mass: 1.1, restDelta: 0.001 })
+
+  useEffect(() => {
+    const section = ref.current
+    if (!section) return
+    const mobile = window.matchMedia("(width < 48rem)")
+    let startX = 0
+    let startY = 0
+    let consumed = false
+    let tracking = false
+
+    const onStart = (event: TouchEvent) => {
+      tracking = mobile.matches && event.touches.length === 1
+      consumed = false
+      if (!tracking) return
+      startX = event.touches[0].clientX
+      startY = event.touches[0].clientY
+    }
+    const onMove = (event: TouchEvent) => {
+      if (!tracking || event.touches.length !== 1) return
+      if (consumed) {
+        if (event.cancelable) event.preventDefault()
+        return
+      }
+      const dx = event.touches[0].clientX - startX
+      const dy = startY - event.touches[0].clientY
+      if (dy === 0 || Math.abs(dx) > Math.abs(dy)) return
+      const top = section.getBoundingClientRect().top + window.scrollY
+      const viewport = section.firstElementChild?.clientHeight ?? window.innerHeight
+      const distance = section.offsetHeight - viewport
+      if (distance <= 0) return
+      const position = window.scrollY - top
+      // Outside the pinned sequence, keep normal page scrolling.
+      if (position < -2 || position > distance + 2) return
+      const progress = Math.max(0, Math.min(1, position / distance))
+      const stage = progress < 0.25 ? 0 : progress < 0.75 ? 1 : 2
+      const next = stage + (dy > 0 ? 1 : -1)
+      if (next < 0 || next > 2) return
+      if (!event.cancelable) return
+      event.preventDefault()
+      if (Math.abs(dy) < 40) return
+      consumed = true
+      setScrollDirection(dy > 0 ? "down" : "up")
+      window.scrollTo({
+        top: top + distance * [0, 0.5, 1][next],
+        behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "instant" : "smooth",
+      })
+    }
+    const onEnd = () => { tracking = false }
+    section.addEventListener("touchstart", onStart, { passive: true })
+    section.addEventListener("touchmove", onMove, { passive: false })
+    section.addEventListener("touchend", onEnd)
+    section.addEventListener("touchcancel", onEnd)
+    return () => {
+      section.removeEventListener("touchstart", onStart)
+      section.removeEventListener("touchmove", onMove)
+      section.removeEventListener("touchend", onEnd)
+      section.removeEventListener("touchcancel", onEnd)
+    }
+  }, [])
 
   useMotionValueEvent(scrollY, "change", (current) => {
     const previous = scrollY.getPrevious()
