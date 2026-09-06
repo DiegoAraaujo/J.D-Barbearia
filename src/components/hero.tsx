@@ -29,7 +29,7 @@ const navLinks = [
   { label: "Contato", href: "#contact", icon: MessageCircle },
 ] as const;
 const services = ["Corte", "Barba", "Navalha", "Sobrancelha"];
-const heroVideos = ["videoteste.mp4", "videoteste.mp4", "videoteste.mp4"];
+const heroVideos = ["hero.mp4", "hero.mp4", "hero.mp4"];
 
 const Hero = () => {
   const [titleNumber, setTitleNumber] = useState(0);
