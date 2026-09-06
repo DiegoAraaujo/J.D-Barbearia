@@ -144,7 +144,6 @@ src/
     page.tsx                # Composição da página inicial
   components/               # Seções, formulários e componentes visuais
     ui/                     # Componentes reutilizáveis de interface
-  data/reviews.ts            # Dados de exemplo; não alimentam as páginas atuais
   lib/
     supabase.ts             # Clientes Supabase exclusivos do servidor
     reviews.ts              # Consulta das avaliações aprovadas
