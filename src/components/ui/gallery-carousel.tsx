@@ -29,26 +29,26 @@ const slides: Slide[] = [
   },
   {
     image: "/images/photo2.webp",
-    title: "Degradê na régua",
-    description: "Transição limpa, sem falha, com máquina calibrada na medida.",
+    title: "Degradê",
+    description: "Low fade com aresta preservada e mais volume no topo.",
     badge: "Degradê",
   },
   {
     image: "/images/photo3.webp",
-    title: "Corte social",
-    description: "Visual alinhado e acabamento natural para qualquer ocasião.",
+    title: "Corte americano",
+    description: "Americano com uma pegada social: alinhado e ideal para um visual formal.",
     badge: "Corte",
   },
   {
     image: "/images/photo4.webp",
     title: "Freestyle",
-    description: "Desenho personalizado com linhas limpas e muita personalidade.",
+    description: "Um desenho pra sair do básico e deixar o corte com a sua cara.",
     badge: "Arte",
   },
   {
     image: "/images/photo5.webp",
-    title: "Mullet moderno",
-    description: "Textura, contorno e estilo em um corte cheio de atitude.",
+    title: "Moicano",
+    description: "Uma pegada mais agressiva, com freestyle pra marcar presença.",
     badge: "Estilo",
   },
 ]
@@ -234,7 +234,10 @@ const GalleryCard = ({ slide, index, total, progress, config }: CardProps) => {
         sizes="(min-width: 1280px) 336px, (min-width: 1024px) 288px, (min-width: 640px) 224px, 176px"
         src={slide.image}
         alt={slide.title}
-        className="pointer-events-none absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
+        className={cn(
+          "pointer-events-none absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-110",
+          slide.image === "/images/photo1.webp" && "object-right",
+        )}
       />
 
       <motion.div
