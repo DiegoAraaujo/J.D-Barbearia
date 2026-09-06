@@ -56,7 +56,7 @@ const ScrollChoreography = ({ className, images }: Props) => {
         <motion.div style={{ opacity: fourOpacity, scale: fourScale }} className="absolute inset-0 grid grid-cols-2 gap-3 p-4 md:block md:p-0">
           {story.map(([number, title, text, image, position]) => (
             <article key={number} className={cn("relative min-h-0 overflow-hidden rounded-2xl shadow-2xl ring-1 ring-gold/20 md:absolute md:h-[31vh] md:w-[42vw]", position)}>
-              <Image src={images[image]} alt="" fill sizes="(min-width: 768px) 42vw, 50vw" className="object-cover" />
+              <Image src={images[image]} alt="" fill sizes="(min-width: 768px) 42vw, 50vw" className={image === "topLeft" ? "object-cover object-bottom-right md:object-bottom" : "object-cover"} />
               <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/65 to-ink/15" />
               <div className="absolute inset-x-0 bottom-0 p-4 md:p-6">
                 <span className="text-xs font-semibold tracking-[.2em] text-gold">{number}</span>
@@ -86,7 +86,7 @@ const ScrollChoreography = ({ className, images }: Props) => {
           <div className="absolute inset-0 bg-gradient-to-r from-ink/95 via-ink/80 to-ink/25" />
           <motion.div style={{ opacity: contentOpacity, y: contentY }} className="absolute inset-0 flex max-w-2xl flex-col justify-end p-6 pb-12 md:justify-center md:p-12 lg:p-20">
             <span className="text-xs font-semibold uppercase tracking-[.24em] text-gold">Sobre mim</span>
-            <h3 className="mt-3 font-display text-4xl text-bone md:text-6xl">Sobre o Diego</h3>
+            <h3 className="mt-3 font-display text-4xl text-bone md:text-6xl">Seu barbeiro</h3>
             <p className="mt-5 max-w-xl text-sm leading-relaxed text-bone/80 md:text-lg">Sou Diego, barbeiro e universitário. Há mais de seis anos, transformei uma oportunidade em profissão e paixão.</p>
             <p className="mt-3 max-w-xl text-sm leading-relaxed text-bone/80 md:text-lg">Hoje, busco oferecer mais que um bom corte: um atendimento cuidadoso, leve e acolhedor.</p>
             <p className="mt-5 max-w-xl border-l border-gold pl-4 font-display text-lg text-bone md:text-2xl">Quero que você saia bem com o corte — e também mais tranquilo e à vontade.</p>

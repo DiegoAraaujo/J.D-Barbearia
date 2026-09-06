@@ -2,8 +2,7 @@ import Reveal from "@/components/reveal"
 import ScrollChoreography from "@/components/ui/scroll-choreography"
 
 const images = {
-  topLeft:
-    "https://images.unsplash.com/photo-1731655257703-99d690707781?auto=format&fit=crop&w=1600&q=80",
+  topLeft: "/images/barbershop-interior.webp",
   bottomRight:
     "https://images.unsplash.com/photo-1546596468-13349ee0c504?auto=format&fit=crop&w=1600&q=80",
   bottomLeft:
