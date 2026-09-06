@@ -23,9 +23,9 @@ interface Slide {
 const slides: Slide[] = [
   {
     image: "/images/photo1.webp",
-    title: "Degradê com risca",
-    description: "Transição suave com desenho preciso e acabamento marcante.",
-    badge: "Degradê",
+    title: "Corte com volume",
+    description: "Volume no topo, laterais alinhadas e acabamento natural na nuca.",
+    badge: "Corte",
   },
   {
     image: "/images/photo2.webp",
