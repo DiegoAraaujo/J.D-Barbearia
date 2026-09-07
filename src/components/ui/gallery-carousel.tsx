@@ -11,45 +11,38 @@ import {
   type MotionValue,
 } from "motion/react"
 import { cn } from "@/utils/class-name"
-import { Badge } from "@/components/ui/badge"
 
 interface Slide {
   image: string
   title: string
   description: string
-  badge: string
 }
 
 const slides: Slide[] = [
   {
     image: "/images/photo1.webp",
-    title: "Corte com volume",
+    title: "Social",
     description: "Volume no topo, laterais alinhadas e acabamento natural na nuca.",
-    badge: "Corte",
   },
   {
     image: "/images/photo2.webp",
     title: "Degradê",
     description: "Low fade com aresta preservada e mais volume no topo.",
-    badge: "Degradê",
   },
   {
     image: "/images/photo3.webp",
-    title: "Corte americano",
+    title: "Americano",
     description: "Americano com uma pegada social: alinhado e ideal para um visual formal.",
-    badge: "Corte",
   },
   {
     image: "/images/photo4.webp",
     title: "Freestyle",
     description: "Um desenho pra sair do básico e deixar o corte com a sua cara.",
-    badge: "Arte",
   },
   {
     image: "/images/photo5.webp",
     title: "Moicano",
     description: "Uma pegada mais agressiva, com freestyle pra marcar presença.",
-    badge: "Estilo",
   },
 ]
 
@@ -246,10 +239,6 @@ const GalleryCard = ({ slide, index, total, progress, config }: CardProps) => {
       />
 
       <div className="absolute inset-0 bg-gradient-to-t from-ink/90 via-ink/30 to-transparent" />
-
-      <Badge className="absolute top-3 right-3 px-2 py-0.5 text-[10px] uppercase sm:top-5 sm:right-5 sm:px-3 sm:py-1 lg:top-6 lg:right-6">
-        {slide.badge}
-      </Badge>
 
       <div className="absolute right-3 bottom-5 left-3 text-center text-bone sm:right-5 sm:bottom-8 sm:left-5 sm:text-left lg:right-6 lg:bottom-10 lg:left-6">
         <motion.p
