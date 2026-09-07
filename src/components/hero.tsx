@@ -35,7 +35,9 @@ const Hero = () => {
   const [titleNumber, setTitleNumber] = useState(0);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [headerScrolled, setHeaderScrolled] = useState(false);
-  const [selectedVideo, setSelectedVideo] = useState(0);
+  // Reativar junto com o seletor de vídeos quando houver outros vídeos.
+  // const [selectedVideo, setSelectedVideo] = useState(0);
+  const selectedVideo = 0;
   const { scrollY } = useScroll();
 
   useMotionValueEvent(scrollY, "change", (current) => {
@@ -59,7 +61,7 @@ const Hero = () => {
     >
       <video
         key={selectedVideo}
-        className="absolute inset-0 h-full w-full object-cover animate-[slow-zoom_18s_ease-in-out_infinite_alternate]"
+        className="absolute inset-0 h-full w-full object-cover object-top animate-[slow-zoom_18s_ease-in-out_infinite_alternate]"
         autoPlay
         loop
         muted
@@ -218,6 +220,7 @@ const Hero = () => {
         </motion.div>
       </div>
 
+      {/* Seletor de vídeos reservado para implementação futura.
       <div
         className="absolute bottom-6 left-1/2 z-20 flex -translate-x-1/2 items-center gap-2 md:bottom-8"
         role="group"
@@ -238,6 +241,7 @@ const Hero = () => {
           />
         ))}
       </div>
+      */}
     </section>
   );
 };
