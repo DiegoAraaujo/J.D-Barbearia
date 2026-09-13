@@ -1,5 +1,5 @@
 import * as React from "react"
-import { Star } from "lucide-react"
+import { Star, UserRound } from "lucide-react"
 import { cn } from "@/utils/class-name"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 
@@ -33,7 +33,7 @@ const Testimonial = React.forwardRef<HTMLDivElement, TestimonialProps>(
               key={index}
               size={14}
               className={
-                index < rating ? "fill-gold text-gold" : "fill-transparent text-bone/20"
+                index < rating ? "fill-yellow-400 text-yellow-400" : "fill-transparent text-bone/20"
               }
             />
           ))}
@@ -42,12 +42,13 @@ const Testimonial = React.forwardRef<HTMLDivElement, TestimonialProps>(
         {testimonial ? <p className="text-pretty text-sm leading-relaxed text-bone/80 md:text-base">{testimonial}</p> : null}
 
         <div className="mt-auto flex items-center gap-3">
-          {image ? (
-            <Avatar className={avatarClassName}>
-              <AvatarImage src={image} alt={name} />
-              <AvatarFallback>{name[0]}</AvatarFallback>
-            </Avatar>
-          ) : null}
+          <Avatar className={avatarClassName}>
+            {image ? <AvatarImage src={image} alt={name} /> : null}
+            <AvatarFallback className="bg-bone/10 text-bone/60">
+              <UserRound className="h-1/2 w-1/2" aria-hidden="true" />
+              <span className="sr-only">Avatar padrão de {name}</span>
+            </AvatarFallback>
+          </Avatar>
           <div className="flex flex-col">
             <span className="text-sm font-medium text-bone">{name}</span>
             <span className="text-xs text-bone/60">{role}</span>
