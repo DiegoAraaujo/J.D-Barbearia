@@ -3,6 +3,7 @@
 import { ChangeEvent, FormEvent, useRef, useState } from "react"
 import { Camera, ImagePlus, Info, LoaderCircle, Star, X } from "lucide-react"
 import CameraCapture from "@/components/camera-capture"
+import ReviewPhotoPreview from "@/components/review-photo-preview"
 
 type FormStatus = "idle" | "sending" | "success" | "error"
 
@@ -63,7 +64,7 @@ const ReviewForm = () => {
           <div className="flex h-12 items-center gap-2" aria-label="Nota de 1 a 5 estrelas">
             {Array.from({ length: 5 }, (_, index) => index + 1).map((value) => (
               <button key={value} type="button" onClick={() => setRating(value)} aria-label={`${value} ${value === 1 ? "estrela" : "estrelas"}`} aria-pressed={rating === value} className="rounded-sm p-1 text-gold transition-transform hover:scale-110 focus-visible:outline-2 focus-visible:outline-gold">
-                <Star className={value <= rating ? "fill-gold" : "fill-transparent"} />
+                <Star className={value <= rating ? "fill-yellow-400 text-yellow-400" : "fill-transparent"} />
               </button>
             ))}
           </div>
@@ -86,7 +87,7 @@ const ReviewForm = () => {
           Ao enviar uma foto, você concorda que ela seja exibida publicamente junto à avaliação após a aprovação.
         </p>
         <input ref={galleryInputRef} type="file" accept="image/jpeg,image/png,image/webp" onChange={selectPhoto} className="sr-only" />
-        {photo ? <div className="mt-3 flex items-center justify-between gap-3 rounded-xl bg-ink px-4 py-2 text-xs text-bone/60"><span className="truncate">{photo.name}</span><button type="button" onClick={() => setPhoto(null)} aria-label="Remover foto selecionada" className="shrink-0 text-bone/50 hover:text-gold"><X className="h-4 w-4" /></button></div> : null}
+        {photo ? <ReviewPhotoPreview photo={photo} onRemove={() => { setPhoto(null); if (galleryInputRef.current) galleryInputRef.current.value = "" }} /> : null}
       </div>
 
       {photoOptionsOpen ? (
